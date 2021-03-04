@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package go.micro.srv.GetArea;
+
+service Example {
+	rpc GetArea(Request) returns (Response) {}
+	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
+	rpc PingPong(stream Ping) returns (stream Pong) {}
+}
+
+message Message {
+	string say = 1;
+}
+
+message Request {
+	// 无传入参数
+}
+
+message Response {
+	string error = 1;
+	string errmsg = 2;
+	message area {
+	    int32 aid = 1;
+	    string aname = 2;
+	}
+	repeated area data =3;
+}
+
+message StreamingRequest {
+	int64 count = 1;
+}
+
+message StreamingResponse {
+	int64 count = 1;
+}
+
+message Ping {
+	int64 stroke = 1;
+}
+
+message Pong {
+	int64 stroke = 1;
+}
